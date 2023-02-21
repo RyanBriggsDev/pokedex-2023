@@ -1,10 +1,46 @@
+// @ts-nocheck
+
 import Head from 'next/head'
 import Header from '@/components/Header'
 import Container from '@/components/Container'
+import Form from '@/components/forms/Form'
+
 import { useRouter } from 'next/router'
+import { useState } from 'react'
+import PokemonCard from '@/components/PokemonCard'
 
 export default function Home() {
+  const [searchTermOne, setSearchTermOne] = useState(null)
+  const [searchTermTwo, setSearchTermTwo] = useState(null)
+  const [loading, setLoading] = useState(false)
+  const [pokemonOne, setPokemonOne] = useState<null | object>(null)
+  const [pokemonTwo, setPokemonTwo] = useState<null | object>(null)
+  const [err, setErr] = useState<null | boolean>(null)
+
   const router = useRouter()
+
+  const fetchData = async (searchTerm): string => {
+    try {
+      setLoading(true)
+      setErr(null)
+      const res = await fetch(`https://pokeapi.co/api/v2/pokemon/${searchTerm}`)
+      if (!res.ok) {
+        setErr(true)
+        setLoading(false)
+        // setTimeout(setErr(false), 5000)
+        return
+      } else {
+        const jsonData = await res.json()
+        if (searchTerm === searchTermOne) setPokemonOne(jsonData)
+        if (searchTerm === searchTermTwo) setPokemonTwo(jsonData)
+        setLoading(false)
+      }
+    } catch (error) {
+      setLoading(false)
+      setErr(error)
+    }
+  }
+
   return (
     <>
       <Head>
@@ -19,8 +55,37 @@ export default function Home() {
         handleClick={() => router.push('/all')}
       />
       <main className="flex flex-col items-center">
-        <Container>
-          <h1 className="text-xl">Pokédex</h1>
+        <Container className="gap-3 my-6">
+          <Form
+            handleSubmit={(e) => {
+              e.preventDefault()
+              if (searchTermOne) {
+                fetchData(searchTermOne)
+              } else alert('Please fill in the form')
+            }}
+            handleChange={(e) => setSearchTermOne(e.target.value.toLowerCase())}
+            label="Search for your first Pokémon"
+          />
+
+          {pokemonOne && <PokemonCard pokemon={pokemonOne} />}
+
+          {pokemonOne && (
+            <Form
+              handleSubmit={(e) => {
+                e.preventDefault()
+                if (searchTermTwo) {
+                  fetchData(searchTermTwo)
+                } else alert('Please fill in the form')
+              }}
+              label="Search for another Pokémon to compare"
+              handleChange={(e) =>
+                setSearchTermTwo(e.target.value.toLowerCase())
+              }
+            />
+          )}
+          {pokemonTwo && <PokemonCard pokemon={pokemonTwo} />}
+          {err && <h3>Error. Please try again.</h3>}
+          {loading && <h3>Loading...</h3>}
         </Container>
       </main>
     </>

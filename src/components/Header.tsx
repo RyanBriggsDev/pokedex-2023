@@ -3,7 +3,6 @@ import Container from './Container'
 import Button from './Button'
 import pokemon from '@/assets/images/pokemon.jpg'
 import pokedexLogo from '@/assets/images/pokedexLogo.png'
-import { useEffect, useState } from 'react'
 
 export default function Header({
   p,
@@ -11,27 +10,6 @@ export default function Header({
   buttonType,
   handleClick,
 }: HeaderProps) {
-  const [loading, setLoading] = useState(false)
-  const [data, setData] = useState<null | object>(null)
-
-  const url = 'https://pokeapi.co/api/v2/pokemon/ivysaur'
-
-  const fetchData = async () => {
-    try {
-      setLoading(true)
-      const res = await fetch(url)
-      if (!res.ok) {
-        return
-      } else {
-        const jsonData = await res.json()
-        setData(jsonData)
-        setLoading(false)
-      }
-    } catch (error) {
-      console.log(error)
-    }
-  }
-
   return (
     <header
       className="min-h-[20rem] w-screen flex justify-center items-center text-center bg-no-repeat bg-cover bg-center relative"
