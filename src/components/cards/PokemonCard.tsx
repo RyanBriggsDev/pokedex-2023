@@ -1,5 +1,5 @@
 import Card from './Card'
-import capitalise from './lib/capitalise'
+import capitalise from '../lib/capitalise'
 import Image from 'next/image'
 
 // need to update this type
