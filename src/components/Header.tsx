@@ -1,4 +1,4 @@
-import { FormEvent } from 'react'
+import { ReactElement } from 'react'
 import Image from 'next/image'
 import Container from './Container'
 import Button from './Button'
@@ -10,6 +10,7 @@ export default function Header({
   buttonText,
   buttonType,
   handleClick,
+  children,
 }: HeaderProps) {
   return (
     <header
@@ -23,7 +24,7 @@ export default function Header({
       <Container>
         <div className="relative z-10 text-white flex flex-col gap-5 items-center">
           <Image src={pokedexLogo} alt="pokemon at the start of battle" />
-          {p && <p className="text-md">{p}</p>}
+          {p && <p className="text-lg">{p}</p>}
           {buttonText && (
             <Button
               type={buttonType}
@@ -31,6 +32,7 @@ export default function Header({
               handleClick={handleClick}
             />
           )}
+          {children}
         </div>
       </Container>
     </header>
@@ -38,8 +40,9 @@ export default function Header({
 }
 
 type HeaderProps = {
-  p: string
+  p?: string
   buttonText?: string
   buttonType?: string
   handleClick?: any
+  children?: ReactElement
 }
