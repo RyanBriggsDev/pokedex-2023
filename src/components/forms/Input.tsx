@@ -13,6 +13,6 @@ export default function Input({ handleChange, label }: InputProps) {
 }
 
 type InputProps = {
-  handleChange: () => void
+  handleChange: (e: any) => void
   label: string
 }

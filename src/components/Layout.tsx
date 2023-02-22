@@ -2,7 +2,7 @@ import { ReactNode } from 'react'
 import Nav from './Nav'
 import Footer from './Footer'
 
-export default function Layout({ children }: { children: ReactNode }) {
+export default function Layout({ children }: Props) {
   return (
     <div className="flex flex-col min-h-screen">
       <Nav />
@@ -12,4 +12,8 @@ export default function Layout({ children }: { children: ReactNode }) {
       <Footer />
     </div>
   )
+}
+
+type Props = {
+  children: ReactNode
 }

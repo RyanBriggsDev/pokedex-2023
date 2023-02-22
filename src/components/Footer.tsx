@@ -1,7 +1,7 @@
 import Container from './Container'
 
 export default function Footer() {
-  const year = new Date().getFullYear()
+  const year: number = new Date().getFullYear()
 
   return (
     <footer className="h-10 flex items-center bg-white justify-center">

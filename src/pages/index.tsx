@@ -1,28 +1,27 @@
-// @ts-nocheck
-
 import Head from 'next/head'
 import Header from '@/components/Header'
 import Container from '@/components/Container'
 import Form from '@/components/forms/Form'
 
-import { useRouter } from 'next/router'
+import { useRouter, NextRouter } from 'next/router'
 import { useState } from 'react'
 import PokemonCard from '@/components/cards/PokemonCard'
+import { SinglePokemon } from '@/components/lib/types'
 
 export default function Home() {
-  const [searchTermOne, setSearchTermOne] = useState(null)
-  const [searchTermTwo, setSearchTermTwo] = useState(null)
-  const [loading, setLoading] = useState(false)
-  const [pokemonOne, setPokemonOne] = useState<null | object>(null)
-  const [pokemonTwo, setPokemonTwo] = useState<null | object>(null)
-  const [err, setErr] = useState<null | boolean>(null)
+  const [searchTermOne, setSearchTermOne] = useState<string>('')
+  const [searchTermTwo, setSearchTermTwo] = useState<string>('')
+  const [loading, setLoading] = useState<boolean>(false)
+  const [pokemonOne, setPokemonOne] = useState<SinglePokemon>()
+  const [pokemonTwo, setPokemonTwo] = useState<SinglePokemon>()
+  const [err, setErr] = useState<boolean>(false)
 
-  const router = useRouter()
+  const router: NextRouter = useRouter()
 
-  const fetchData = async (searchTerm): string => {
+  const fetchData = async (searchTerm: string) => {
     try {
       setLoading(true)
-      setErr(null)
+      setErr(false)
       const res = await fetch(`https://pokeapi.co/api/v2/pokemon/${searchTerm}`)
       if (!res.ok) {
         setErr(true)
@@ -36,7 +35,7 @@ export default function Home() {
       }
     } catch (error) {
       setLoading(false)
-      setErr(error)
+      setErr(true)
     }
   }
 
@@ -57,7 +56,7 @@ export default function Home() {
         <Container className="gap-3 my-6">
           <Form
             button={true}
-            handleSubmit={(e) => {
+            handleSubmit={(e: any) => {
               e.preventDefault()
               if (searchTermOne) {
                 fetchData(searchTermOne)

@@ -1,28 +1,28 @@
 import { useState, useEffect } from 'react'
-import { useRouter } from 'next/router'
+import { useRouter, NextRouter } from 'next/router'
 import capitalise from '@/components/lib/capitalise'
 import Header from '@/components/Header'
 import Container from '@/components/Container'
 import Card from '@/components/cards/Card'
 import Image from 'next/image'
 import Loading from '@/components/Loading'
+import type { Pokemon, SinglePokemon } from '@/components/lib/types'
 
-export default function Index() {
-  const router = useRouter()
-  const { id } = router.query
+export default function SinglePokemon() {
+  const router: NextRouter = useRouter()
+  const id = router.query.id as string
   const [loading, setLoading] = useState<boolean>()
-  const [pokemon, setPokemon] = useState<any>(null)
-  const [err, setErr] = useState<any>(null)
-  const [moves, setMoves] = useState<any>(null)
+  const [pokemon, setPokemon] = useState<undefined | SinglePokemon>(undefined)
+  const [err, setErr] = useState<boolean>(false)
 
-  const divAlignClass =
+  const divAlignClass: string =
     'flex flex-wrap w-full gap-2 place-content-around [&>*]:px-4 &>*]:text-md &>*]:text-left &>*]:md:text-center'
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         setLoading(true)
-        setErr(null)
+        setErr(false)
         const res = await fetch(`https://pokeapi.co/api/v2/pokemon/${id}`)
         if (!res.ok) {
           setErr(true)
@@ -35,7 +35,7 @@ export default function Index() {
         }
       } catch (error) {
         setLoading(false)
-        setErr(error)
+        setErr(true)
       }
     }
     if (id) fetchData()
@@ -165,9 +165,13 @@ export default function Index() {
   }
 }
 
-function Paginate({ pokeId }: any) {
-  const router = useRouter()
-  const buttonStyle =
+type PokeId = {
+  pokeId: number
+}
+
+function Paginate({ pokeId }: PokeId) {
+  const router: NextRouter = useRouter()
+  const buttonStyle: string =
     'h-10 w-10 text-center flex justify-center items-center cursor-pointer duration-300 ease-in-out'
   return (
     <>

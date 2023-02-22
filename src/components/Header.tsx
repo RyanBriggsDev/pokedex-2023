@@ -4,7 +4,6 @@ import Container from './Container'
 import Button from './Button'
 import pokemon from '@/assets/images/pokemon.jpg'
 import pokedexLogo from '@/assets/images/pokedexLogo.png'
-
 export default function Header({
   p,
   buttonText,

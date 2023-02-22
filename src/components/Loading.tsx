@@ -1,8 +1,8 @@
 import Card from './cards/Card'
 
 export default function Loading() {
-  const blue = 'h-10 w-10 animate-spin rounded-xl bg-poke-blue'
-  const yellow = 'h-5 w-10 animate-spin rounded-xl bg-poke-yellow'
+  const blue: string = 'h-10 w-10 animate-spin rounded-xl bg-poke-blue'
+  const yellow: string = 'h-5 w-10 animate-spin rounded-xl bg-poke-yellow'
 
   return (
     <Card className="gap-3">

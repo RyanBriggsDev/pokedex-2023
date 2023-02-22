@@ -16,8 +16,8 @@ export default function Form({
 }
 
 type FormProps = {
-  handleChange: () => void
-  handleSubmit: () => void
+  handleChange: (e: any) => void
+  handleSubmit?: (e: any) => void
   label: string
-  button: undefined | boolean
+  button?: boolean
 }

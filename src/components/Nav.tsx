@@ -3,8 +3,9 @@ import { useState } from 'react'
 import Link from 'next/link'
 
 export default function Nav() {
-  const [navOpen, setNavOpen] = useState(false)
-  const hamburgerLineClass = 'w-8 h-[2px] bg-black duration-300 ease-in-out'
+  const [navOpen, setNavOpen] = useState<boolean>(false)
+  const hamburgerLineClass: string =
+    'w-8 h-[2px] bg-black duration-300 ease-in-out'
 
   return (
     <nav className="h-10 flex items-center justify-center relative">

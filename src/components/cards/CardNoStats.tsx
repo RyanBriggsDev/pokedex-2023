@@ -2,13 +2,14 @@ import Card from './Card'
 import Image from 'next/image'
 import capitalise from '../lib/capitalise'
 import { useRouter } from 'next/router'
+import type { Pokemon } from '../lib/types'
 
 export default function CardNoStats({
   pokemon,
   index,
 }: {
-  pokemon: any
-  index: any
+  pokemon: Pokemon
+  index: number
 }) {
   const router = useRouter()
 

@@ -22,7 +22,7 @@ export default function Card({
 
 type CardProps = {
   children: ReactNode
-  index?: any
+  index?: number
   className?: string
   handleClick?: () => void
 }
