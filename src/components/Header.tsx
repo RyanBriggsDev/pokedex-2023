@@ -1,3 +1,4 @@
+import { FormEvent } from 'react'
 import Image from 'next/image'
 import Container from './Container'
 import Button from './Button'
@@ -38,7 +39,7 @@ export default function Header({
 
 type HeaderProps = {
   p: string
-  buttonText: string
-  buttonType?: 'string'
-  handleClick: () => void
+  buttonText?: string
+  buttonType?: string
+  handleClick?: any
 }

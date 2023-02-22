@@ -7,7 +7,7 @@ import Form from '@/components/forms/Form'
 
 import { useRouter } from 'next/router'
 import { useState } from 'react'
-import PokemonCard from '@/components/PokemonCard'
+import PokemonCard from '@/components/cards/PokemonCard'
 
 export default function Home() {
   const [searchTermOne, setSearchTermOne] = useState(null)
@@ -27,7 +27,6 @@ export default function Home() {
       if (!res.ok) {
         setErr(true)
         setLoading(false)
-        // setTimeout(setErr(false), 5000)
         return
       } else {
         const jsonData = await res.json()
@@ -57,6 +56,7 @@ export default function Home() {
       <main className="flex flex-col items-center">
         <Container className="gap-3 my-6">
           <Form
+            button={true}
             handleSubmit={(e) => {
               e.preventDefault()
               if (searchTermOne) {
@@ -71,6 +71,7 @@ export default function Home() {
 
           {pokemonOne && (
             <Form
+              button={true}
               handleSubmit={(e) => {
                 e.preventDefault()
                 if (searchTermTwo) {

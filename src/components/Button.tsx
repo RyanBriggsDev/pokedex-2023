@@ -15,7 +15,7 @@ export default function Button({ handleClick, text, type }: ButtonProps) {
 }
 
 type ButtonProps = {
-  handleClick: () => void
+  handleClick: React.FormEventHandler<HTMLElement>
   text: string
   type?: string | boolean
 }
