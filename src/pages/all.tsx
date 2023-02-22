@@ -58,7 +58,7 @@ export default function All() {
       <main className="flex flex-col items-center">
         <Container className="gap-3 my-6">
           <Form
-            label="Or search for your favourite"
+            label="Or search for your favourite original"
             handleChange={(e) => {
               setSearchTerm(e.target.value)
             }}

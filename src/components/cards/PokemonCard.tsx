@@ -22,30 +22,30 @@ export default function PokemonCard({ pokemon }: { pokemon: any }) {
             <span className="font-semibold">Height:</span> {pokemon.height}
           </p>
           <p>
-            <span className="font-semibold">Speed:</span>{' '}
+            <span className="font-semibold">Speed: </span>
             {pokemon.stats[5].base_stat}
           </p>
           <p>
             <span className="font-semibold">Weight:</span> {pokemon.weight}
           </p>
           <p>
-            <span className="font-semibold">Attack:</span>{' '}
+            <span className="font-semibold">Attack: </span>
             {pokemon.stats[1].base_stat}
           </p>
           <p>
-            <span className="font-semibold">HP:</span>{' '}
+            <span className="font-semibold">HP: </span>
             {pokemon.stats[0].base_stat}
           </p>
           <p>
-            <span className="font-semibold">Defence:</span>{' '}
+            <span className="font-semibold">Defence: </span>
             {pokemon.stats[2].base_stat}
           </p>
           <p>
-            <span className="font-semibold">Type:</span>{' '}
+            <span className="font-semibold">Type: </span>
             {capitalise(pokemon.types[0].type.name)}
           </p>
           <p>
-            <span className="font-semibold">Move:</span>{' '}
+            <span className="font-semibold">Move: </span>
             {capitalise(pokemon.moves[0].move.name).replace('-', ' ')}
           </p>
         </div>
