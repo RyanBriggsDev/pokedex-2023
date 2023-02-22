@@ -5,9 +5,9 @@ import Container from '@/components/Container'
 import Form from '@/components/forms/Form'
 import { useState, useEffect } from 'react'
 import dynamic from 'next/dynamic'
-import CardsLoading from '@/components/CardsLoading'
+import Loading from '@/components/Loading'
 const AllPokemon = dynamic(() => import('@/components/AllPokemon'), {
-  loading: () => <CardsLoading />,
+  loading: () => <Loading />,
 })
 
 export default function All() {
