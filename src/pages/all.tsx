@@ -1,10 +1,14 @@
 // @ts-nocheck
-
+import React from 'react'
 import Header from '@/components/Header'
 import Container from '@/components/Container'
 import Form from '@/components/forms/Form'
-import CardNoStats from '@/components/cards/CardNoStats'
 import { useState, useEffect } from 'react'
+import dynamic from 'next/dynamic'
+import CardsLoading from '@/components/CardsLoading'
+const AllPokemon = dynamic(() => import('@/components/AllPokemon'), {
+  loading: () => <CardsLoading />,
+})
 
 export default function All() {
   const [loading, setLoading] = useState<boolean>()
@@ -66,21 +70,17 @@ export default function All() {
           {loading && <h1>Loading...</h1>}
           {err && <h1>Error...</h1>}
 
-          {searchTerm &&
-            allPokemon.map((poke, index) => (
-              <CardNoStats key={index} pokemon={poke}></CardNoStats>
-            ))}
+          {searchTerm && (
+            <AllPokemon pokemon={allPokemon} searchTerm={searchTerm} />
+          )}
+
           {searchTerm && allPokemon.length === 0 && (
             <h3>No Pokémon matches your search term.</h3>
           )}
 
-          {!loading &&
-            !err &&
-            !searchTerm &&
-            pokemon &&
-            pokemon.results.map((poke, index) => (
-              <CardNoStats key={index} pokemon={poke}></CardNoStats>
-            ))}
+          {!loading && !err && !searchTerm && pokemon && (
+            <AllPokemon pokemon={pokemon.results} />
+          )}
         </Container>
       </main>
     </>
