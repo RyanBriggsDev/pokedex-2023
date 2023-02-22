@@ -30,7 +30,6 @@ export default function Index() {
         } else {
           const jsonData = await res.json()
           setPokemon(jsonData)
-          console.log(moves)
           setLoading(false)
         }
       } catch (error) {
