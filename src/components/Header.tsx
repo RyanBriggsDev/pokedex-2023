@@ -19,7 +19,7 @@ export default function Header({
     >
       <div
         id="dark-overlay"
-        className="absolute top-0 left-0 bg-black/[0.8] w-full h-full z-100"
+        className="absolute top-0 left-0 bg-black/[0.8] w-full h-full z-[1]"
       ></div>
       <Container>
         <div className="relative z-10 text-white flex flex-col gap-5 items-center">
