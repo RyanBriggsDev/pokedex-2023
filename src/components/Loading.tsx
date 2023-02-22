@@ -1,11 +1,11 @@
 import Card from './cards/Card'
 
-export default function CardsLoading() {
+export default function Loading() {
   const blue = 'h-10 w-10 animate-spin rounded-xl bg-poke-blue'
   const yellow = 'h-5 w-10 animate-spin rounded-xl bg-poke-yellow'
 
   return (
-    <Card>
+    <Card className="gap-3">
       <div className="flex gap-2 items-center justify-center">
         <div className={blue}></div>
         <div className={yellow}></div>

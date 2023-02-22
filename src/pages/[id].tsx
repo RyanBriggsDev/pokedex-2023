@@ -5,6 +5,7 @@ import Header from '@/components/Header'
 import Container from '@/components/Container'
 import Card from '@/components/cards/Card'
 import Image from 'next/image'
+import Loading from '@/components/Loading'
 
 export default function Index() {
   const router = useRouter()
@@ -40,8 +41,8 @@ export default function Index() {
     if (id) fetchData()
   }, [id])
 
-  if (loading) return <h1>Loading...</h1>
-  if (err) return <h1>{`Error. Looks like that pokémon doesn't exist!`}</h1>
+  if (loading) return <Loading />
+  if (err) return <h1>{`Error. Looks like that pokémon can't be found!`}</h1>
 
   if (pokemon) {
     return (
@@ -93,7 +94,7 @@ export default function Index() {
                 <div className={divAlignClass}>
                   <p>
                     <span className="font-semibold">HP: </span>
-                    {pokemon.stats[5].base_stat}
+                    {pokemon.stats[0].base_stat}
                   </p>
                   <p>
                     <span className="font-semibold">Speed: </span>
@@ -114,24 +115,36 @@ export default function Index() {
             <Card className="gap-3">
               <h3 className="font-semibold text-2xl">Moves</h3>
               <div className={divAlignClass}>
-                <p>
-                  {capitalise(pokemon.moves[0].move.name).replace('-', ' ')}
-                </p>
-                <p>
-                  {capitalise(pokemon.moves[1].move.name).replace('-', ' ')}
-                </p>
-                <p>
-                  {capitalise(pokemon.moves[2].move.name).replace('-', ' ')}
-                </p>
-                <p>
-                  {capitalise(pokemon.moves[3].move.name).replace('-', ' ')}
-                </p>
-                <p>
-                  {capitalise(pokemon.moves[4].move.name).replace('-', ' ')}
-                </p>
-                <p>
-                  {capitalise(pokemon.moves[5].move.name).replace('-', ' ')}
-                </p>
+                {pokemon.moves[0] && (
+                  <p>
+                    {capitalise(pokemon.moves[0].move.name).replace('-', ' ')}
+                  </p>
+                )}
+                {pokemon.moves[1] && (
+                  <p>
+                    {capitalise(pokemon.moves[1].move.name).replace('-', ' ')}
+                  </p>
+                )}
+                {pokemon.moves[2] && (
+                  <p>
+                    {capitalise(pokemon.moves[2].move.name).replace('-', ' ')}
+                  </p>
+                )}
+                {pokemon.moves[3] && (
+                  <p>
+                    {capitalise(pokemon.moves[3].move.name).replace('-', ' ')}
+                  </p>
+                )}
+                {pokemon.moves[4] && (
+                  <p>
+                    {capitalise(pokemon.moves[4].move.name).replace('-', ' ')}
+                  </p>
+                )}
+                {pokemon.moves[5] && (
+                  <p>
+                    {capitalise(pokemon.moves[5].move.name).replace('-', ' ')}
+                  </p>
+                )}
               </div>
             </Card>
 
@@ -139,12 +152,43 @@ export default function Index() {
               <h3 className="font-semibold text-2xl">Types</h3>
               <div className={divAlignClass}>
                 <p>{capitalise(pokemon.types[0].type.name)}</p>
-                <p>{capitalise(pokemon.types[1].type.name)}</p>
+                {pokemon.types[1] && (
+                  <p>{capitalise(pokemon.types[1].type.name)}</p>
+                )}
               </div>
             </Card>
           </Container>
         </main>
+        <Paginate pokeId={pokemon.id} />
       </>
     )
   }
+}
+
+function Paginate({ pokeId }: any) {
+  const router = useRouter()
+  const buttonStyle =
+    'h-10 w-10 text-center flex justify-center items-center cursor-pointer duration-300 ease-in-out'
+  return (
+    <>
+      {pokeId <= 150 && (
+        <div
+          id="next"
+          className={`${buttonStyle} fixed top-1/2 right-0 hover:bg-poke-blue bg-poke-blue/[0.8] text-white rounded-l-lg`}
+          onClick={() => router.push(`/${pokeId + 1}`)}
+        >
+          <p className="text-xl font-semibold">&#62;</p>
+        </div>
+      )}
+      {pokeId >= 2 && (
+        <div
+          id="previous"
+          className={`${buttonStyle} fixed top-1/2 left-0 hover:bg-poke-yellow bg-poke-yellow/[0.8] text-black rounded-r-lg`}
+          onClick={() => router.push(`/${pokeId - 1}`)}
+        >
+          <p className="text-xl font-semibold">&#60;</p>
+        </div>
+      )}
+    </>
+  )
 }
