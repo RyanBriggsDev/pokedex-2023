@@ -18,7 +18,10 @@ export default function SinglePokemon() {
   const [err, setErr] = useState<boolean>(false)
 
   const divAlignClass: string =
-    'flex flex-wrap w-full gap-2 place-content-around [&>*]:px-4 &>*]:text-md &>*]:text-left &>*]:md:text-center'
+    'flex flex-wrap p-3 w-full gap-2 place-content-around [&>*]:px-4 &>*]:text-md &>*]:text-left &>*]:md:text-center'
+
+  const h3Class: string =
+    'font-semibold text-2xl rounded-t w-full flex justify-center items-center p-3 gap-3 bg-black/[0.8] text-white'
 
   useEffect(() => {
     const fetchData = async () => {
@@ -88,8 +91,8 @@ export default function SinglePokemon() {
               </div>
             </Card>
             <div className="w-full flex flex-col lg:flex-row gap-3">
-              <Card padding className="gap-3">
-                <h3 className="font-semibold text-2xl">Details</h3>
+              <Card className="gap-3">
+                <h3 className={h3Class}>Details</h3>
                 <div className={divAlignClass}>
                   <p>
                     <span className="font-semibold">Weight: </span>
@@ -102,8 +105,8 @@ export default function SinglePokemon() {
                 </div>
               </Card>
 
-              <Card padding className="gap-3">
-                <h3 className="font-semibold text-2xl">Stats</h3>
+              <Card className="gap-3">
+                <h3 className={h3Class}>Stats</h3>
                 <div className={divAlignClass}>
                   <p>
                     <span className="font-semibold">HP: </span>
@@ -126,8 +129,8 @@ export default function SinglePokemon() {
             </div>
 
             <div className="w-full flex flex-col lg:flex-row gap-3">
-              <Card padding className="gap-3">
-                <h3 className="font-semibold text-2xl">Moves</h3>
+              <Card className="gap-3">
+                <h3 className={h3Class}>Moves</h3>
                 <div className={divAlignClass}>
                   {pokemon.moves[0] && (
                     <p>
@@ -162,9 +165,9 @@ export default function SinglePokemon() {
                 </div>
               </Card>
 
-              <Card padding className="gap-3">
-                <h3 className="font-semibold text-2xl">Types</h3>
-                <div className={divAlignClass}>
+              <Card className="gap-3">
+                <h3 className={h3Class}>Types</h3>
+                <div className={`${divAlignClass} h-full`}>
                   <p>{capitalise(pokemon.types[0].type.name)}</p>
                   {pokemon.types[1] && (
                     <p>{capitalise(pokemon.types[1].type.name)}</p>
