@@ -42,12 +42,14 @@ export default function Nav() {
             <Link
               className="w-full md:w-1/2 py-2 hover:bg-white/[0.5]"
               href="/"
+              onClick={() => setNavOpen(false)}
             >
               Home
             </Link>
             <Link
               className="w-full md:w-1/2 py-2 hover:bg-white/[0.5]"
               href="/all"
+              onClick={() => setNavOpen(false)}
             >
               View All Pokémon
             </Link>

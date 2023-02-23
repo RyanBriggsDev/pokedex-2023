@@ -3,20 +3,30 @@ import capitalise from '../lib/capitalise'
 import Image from 'next/image'
 
 // need to update this type
-export default function PokemonCard({ pokemon }: { pokemon: any }) {
+export default function PokemonCard({
+  pokemon,
+  bg,
+}: {
+  pokemon: any
+  bg: string
+}) {
   return (
     <Card>
+      <h3
+        className={`w-full flex items-center justify-center p-3 text-xl rounded-t gap-3 ${
+          bg === 'yellow' ? 'bg-poke-yellow' : 'bg-poke-blue text-white'
+        }`}
+      >
+        <span className="font-semibold">{capitalise(pokemon.name)}</span>
+        {`#${pokemon.id.toString().padStart(3, '0')}`}
+      </h3>
       <Image
         src={pokemon.sprites.front_default}
         width={150}
         height={100}
         alt={`An image of the pokemon ${pokemon.name}`}
       />
-      <div className="flex flex-col items-center justify-center w-full gap-2">
-        <h3>
-          <span className="font-semibold">{capitalise(pokemon.name)}</span>
-          {` | #${pokemon.id.toString().padStart(3, '0')}`}
-        </h3>
+      <div className="flex flex-col items-center justify-center w-full gap-2 p-3">
         <div className="grid grid-cols-2 gap-2 w-full text-center">
           <p>
             <span className="font-semibold">Height:</span> {pokemon.height}
