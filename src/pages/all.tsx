@@ -1,3 +1,4 @@
+import Head from 'next/head'
 import React from 'react'
 import Header from '@/components/Header'
 import Container from '@/components/Container'
@@ -5,6 +6,7 @@ import Form from '@/components/forms/Form'
 import { useState, useEffect } from 'react'
 import dynamic from 'next/dynamic'
 import Loading from '@/components/Loading'
+import Error from '@/components/Error'
 
 const AllPokemon = dynamic(() => import('@/components/AllPokemon'), {
   loading: () => <Loading />,
@@ -52,10 +54,14 @@ export default function All() {
   }, [])
 
   if (loading) return <h1>Loading...</h1>
-  if (err) return <h1>Error...</h1>
+  if (err)
+    return <Error text="Oh no. Somethings gone wrong. Please try again" />
 
   return (
     <>
+      <Head>
+        <title>Pokédex 2023 | View All & Search</title>
+      </Head>
       <Header p="View All 151 Original Pokémon or Filter by Type or Min HP" />
       <main className="flex flex-col items-center">
         <Container className="gap-3 my-6">
@@ -66,16 +72,24 @@ export default function All() {
             }}
           />
           {loading && <h1>Loading...</h1>}
-          {err && <h1>Error...</h1>}
+          {err && (
+            <Error text="Oh no. Somethings gone wrong. Please try again" />
+          )}
 
-          {searchTerm && <AllPokemon pokemon={allPokemon} />}
+          {searchTerm && (
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3  xl:grid-cols-4 2xl:grid-cols-5 w-full gap-4">
+              <AllPokemon pokemon={allPokemon} />
+            </div>
+          )}
 
           {searchTerm && allPokemon.length === 0 && (
-            <h3>No Pokémon matches your search term.</h3>
+            <Error text={`Looks like no Pokémon match your search term.`} />
           )}
 
           {!loading && !err && !searchTerm && pokemon && (
-            <AllPokemon pokemon={pokemon} />
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3  xl:grid-cols-4 2xl:grid-cols-5 w-full gap-4">
+              <AllPokemon pokemon={pokemon} />
+            </div>
           )}
         </Container>
       </main>
