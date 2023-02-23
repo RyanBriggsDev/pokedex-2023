@@ -209,13 +209,13 @@ type PokeId = {
 function Paginate({ pokeId }: PokeId) {
   const router: NextRouter = useRouter()
   const buttonStyle: string =
-    'h-20 w-8 md:w-10 text-center flex justify-center items-center cursor-pointer duration-300 ease-in-out hover:w-20'
+    'h-20 w-8 md:w-10 text-center flex justify-center items-center cursor-pointer duration-300 ease-in-out hover:w-20 fixed top-1/2 z-10'
   return (
     <>
       {pokeId <= 150 && (
         <div
           id="next"
-          className={`${buttonStyle} fixed top-1/2 right-0 hover:bg-poke-blue bg-poke-blue/[0.8] text-white rounded-l-lg`}
+          className={`${buttonStyle} right-0 hover:bg-poke-blue bg-poke-blue/[0.8] text-white rounded-l-lg`}
           onClick={() => router.push(`/${pokeId + 1}`)}
         >
           <p className="text-xl font-semibold">&#62;</p>
@@ -224,7 +224,7 @@ function Paginate({ pokeId }: PokeId) {
       {pokeId >= 2 && (
         <div
           id="previous"
-          className={`${buttonStyle} fixed top-1/2 left-0 hover:bg-poke-yellow bg-poke-yellow/[0.8] text-black rounded-r-lg`}
+          className={`${buttonStyle} left-0 hover:bg-poke-yellow bg-poke-yellow/[0.8] text-black rounded-r-lg`}
           onClick={() => router.push(`/${pokeId - 1}`)}
         >
           <p className="text-xl font-semibold">&#60;</p>

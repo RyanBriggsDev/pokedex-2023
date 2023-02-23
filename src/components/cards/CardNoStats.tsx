@@ -22,7 +22,7 @@ export default function CardNoStats({
 
   return (
     <Card
-      className="hover:bg-white/[0.5] duration-300 ease-in-out cursor-pointer hover:scale-110 hover:z-0 hover:relative"
+      className="hover:bg-white/[0.5] duration-300 ease-in-out cursor-pointer hover:scale-105 hover:z-0 hover:relative"
       index={index}
       handleClick={() => router.push(`/${pokeId}`)}
     >
