@@ -27,7 +27,7 @@ export default function Header({
           {buttonText && (
             <Button
               type={buttonType}
-              text={`Or Check em' All Out`}
+              text={buttonText}
               handleClick={handleClick}
             />
           )}

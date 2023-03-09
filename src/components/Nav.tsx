@@ -48,10 +48,10 @@ export default function Nav() {
             </Link>
             <Link
               className="w-full md:w-1/2 py-2 hover:bg-white/[0.5]"
-              href="/all"
+              href="/compare"
               onClick={() => setNavOpen(false)}
             >
-              View All Pokémon
+              Compare
             </Link>
           </ul>
         </div>
